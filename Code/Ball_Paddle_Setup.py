@@ -37,11 +37,20 @@ clock = pygame.time.Clock()
 #cap.set(3, width)
 #cap.set(4, height)
 
-# Define the ball & ball movement
+# Define colors
+white = (255,255,255)
+
+# Define the ball & ball velocity
 ball_radius = 20
 ball_pos = [(width // 2), (height // 2)]
 ball_vel = [1, 1]
 
+# Define the walls and their location
+wall_thickness = 20
+top_wall = pygame.Rect(0,0, width, wall_thickness)
+bottom_wall = pygame.Rect(0,height - wall_thickness, width, wall_thickness)
+left_wall = pygame.Rect(0, wall_thickness, wall_thickness, height - (2 * wall_thickness))
+walls = [top_wall, bottom_wall, left_wall]
 
 # Main Loop
 start = True
@@ -56,16 +65,31 @@ while start:
     # Update game state
     ball_pos[0] += ball_vel[0]
     ball_pos[1] += ball_vel[1]
-    # if ball is about to exceed left or right most bounds
+
+    # Wall Ball collision
+
+    # Rect Definition always from top left corner & always updating based on new ball position
+    ball_rect = pygame.Rect(ball_pos[0] - ball_radius, ball_pos[1] - ball_radius, (2 * ball_radius), (2 * ball_radius))
+
+    # Collision with top and bottom walls
+    for wall_rect in walls[:2]:
+        if ball_rect.colliderect(wall_rect):
+            ball_vel[1] *= -1
+
+    # Collision with left wall
+    if ball_rect.colliderect(left_wall):
+        ball_vel[0] *= -1
+
+    # if ball is about to exceed left or right most bounds; kept since don't have paddle in place
     if ((ball_pos[0] - ball_radius) <= 0) or ((ball_pos[0] + ball_radius) >= width):
         ball_vel[0] *= -1
-    if(((ball_pos[1] - ball_radius) <= 0) or ((ball_pos[1] + ball_radius) >= height)):
-        ball_vel[1] *= -1
+
 
     # Draw objects on screen
     window.fill((0, 0, 0))  # black screen
-    pygame.draw.circle(window, (255,255,255), ball_pos, ball_radius)
-
+    pygame.draw.circle(window, white, ball_pos, ball_radius) # white ball
+    for wall in walls:
+        pygame.draw.rect(window, white, wall)
 
 
     # Update display
