@@ -33,9 +33,15 @@ fps = 30
 clock = pygame.time.Clock()
 
 # Webcam Settings
-cap = cv2.VideoCapture(0)
-cap.set(3, width)
-cap.set(4, height)
+#cap = cv2.VideoCapture(0)
+#cap.set(3, width)
+#cap.set(4, height)
+
+# Define the ball & ball movement
+ball_radius = 20
+ball_pos = [(width // 2), (height // 2)]
+ball_vel = [1, 1]
+
 
 # Main Loop
 start = True
@@ -47,14 +53,20 @@ while start:
             pygame.quit()
 
     # Apply Logic
-    #window.fill((255,255,255))
+    # Update game state
+    ball_pos[0] += ball_vel[0]
+    ball_pos[1] += ball_vel[1]
+    # if ball is about to exceed left or right most bounds
+    if ((ball_pos[0] - ball_radius) <= 0) or ((ball_pos[0] + ball_radius) >= width):
+        ball_vel[0] *= -1
+    if(((ball_pos[1] - ball_radius) <= 0) or ((ball_pos[1] + ball_radius) >= height)):
+        ball_vel[1] *= -1
 
-    # OpenCV
-    success, img = cap.read()
-    imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    imgRGB = np.rot90(imgRGB)
-    frame = pygame.surfarray.make_surface(imgRGB).convert()
-    window.blit(frame,(0,0))
+    # Draw objects on screen
+    window.fill((0, 0, 0))  # black screen
+    pygame.draw.circle(window, (255,255,255), ball_pos, ball_radius)
+
+
 
     # Update display
     pygame.display.update()
