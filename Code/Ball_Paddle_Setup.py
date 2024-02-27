@@ -30,7 +30,7 @@ window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Pong Life")
 
 # Initialize clock for FPS
-fps = 30
+fps = 60
 clock = pygame.time.Clock()
 
 # Webcam Settings
@@ -40,6 +40,9 @@ cap.set(4, height)
 # Define webcam's separate window
 cv2.namedWindow("Camera Feed", cv2.WINDOW_NORMAL)
 
+# Defining HandDetector
+hand_detect = HandDetector(maxHands= 1)
+
 # Define colors
 white = (255,255,255)
 green = (0, 255, 0)
@@ -47,12 +50,11 @@ green = (0, 255, 0)
 # Define the ball & ball velocity
 ball_radius = 20
 ball_pos = [(width // 2), (height // 2)]
-ball_vel = [1, 1]
+ball_vel = [5, 5]
 
 # Define paddle and location
 paddle_width = 40
 paddle_height = 100
-paddle_speed = 4
 paddle_pos = [(width - 280), (height // 2)]
 paddle_rect = pygame.Rect(paddle_pos[0], paddle_pos[1], paddle_width, paddle_height)
 
@@ -71,12 +73,6 @@ while start:
         if event.type == pygame.QUIT:
             start = False
             pygame.quit()
-        elif event.type == pygame.KEYDOWN:
-            if (event.key == pygame.K_UP):
-                paddle_rect.y -= paddle_speed
-            elif(event.key == pygame.K_DOWN):
-                paddle_rect.y += paddle_speed
-
 
     # Apply Logic
     # Update game state
@@ -97,12 +93,19 @@ while start:
     if ball_rect.colliderect(left_wall):
         ball_vel[0] *= -1
 
-    if ball_rect.colliderect((paddle_rect)):
+    if ball_rect.colliderect(paddle_rect):
+        for index, ball_velocity in enumerate(ball_vel):
+            if ball_velocity < 0:
+                ball_vel[index] -= 2
+            else:
+                ball_vel[index] += 2
+        # Flip direction of ball in x direction
         ball_vel[0] *= -1
 
-    # if ball is about to exceed left or right most bounds; kept since don't have paddle in place
+    # if ball is about to exceed left or right most bounds; kept for testing game
     if ((ball_pos[0] - ball_radius) <= 0) or ((ball_pos[0] + ball_radius) >= width):
         ball_vel[0] *= -1
+
 
 
     # Draw objects on screen
@@ -113,14 +116,23 @@ while start:
         pygame.draw.rect(window, white, wall)
 
     # Creating and loading in webcam image
-    ret, frame = cap.read()
+    success, img = cap.read()
+    cor_img_orient = cv2.flip(img, 1)
+    hands, img_drawn = hand_detect.findHands(cor_img_orient, flipType= False)
+
+    # HandDetector
+    if hands:
+        hand = hands[0]
+        x_9, y_9 = hand['lmList'][9] # Middle Finger MCP
+        x_0, y_0 = hand['lmList'][0] # Wrist
+        paddle_rect.y = int((y_9 + y_0) / 2) # Mapped to approximately hand palm
+
     # If not reading, kill game
-    if not ret:
+    if not success:
         break
 
-    # flip camera output so its more inituitive to user
-    cor_frame_orient = cv2.flip(frame, 1)
-    cv2.imshow('Camera Feed', cor_frame_orient) # Display output in separate window
+    # flip camera output so its more intuitive to user
+    cv2.imshow('Camera Feed', img_drawn) # Display output in separate window
 
     # Update display
     pygame.display.update()
