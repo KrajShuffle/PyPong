@@ -40,7 +40,7 @@ clock = pygame.time.Clock()
 # Webcam Settings
 #cam_prop = 1 - game_prop
 cap = cv2.VideoCapture(0)
-cap.set(3, int(screen_width))
+cap.set(3, int(screen_width / 3))
 cap.set(4, height)
 # Define webcam's separate window
 cv2.namedWindow("Camera Feed", cv2.WINDOW_NORMAL)
@@ -129,7 +129,7 @@ while start:
     success, img = cap.read()
     cor_img_orient = cv2.flip(img, 1)
     hands, img_drawn = hand_detect.findHands(cor_img_orient, flipType= False)
-    paddle.update_paddle_y(hands)
+    paddle.update_paddle_y(hands, height, wall_thickness, 3)
 
     # If not reading, kill game
     if not success:

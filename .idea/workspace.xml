@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/Ball.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Paddle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/Pong_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Added classes for paddle and ball and cleaned game logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Paddle.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Paddle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Pong_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Pong_logic.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,19 +57,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Ball.executor": "Run",
-    "Python.Ball_Paddle_Setup.executor": "Run",
-    "Python.Paddle.executor": "Run",
-    "Python.Pong_logic.executor": "Run",
-    "Python.PyGame_Template.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "settings.editor.selected.configurable": "vcs.Subversion.SSH"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Ball.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Ball_Paddle_Setup.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Paddle.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Pong_logic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.PyGame_Template.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Subversion.SSH&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Code" />
@@ -136,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709013668955</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added classes for paddle and ball and cleaned game logic">
+      <option name="closed" value="true" />
+      <created>1709089196527</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709089196527</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,6 +177,7 @@
     <MESSAGE value="Added ball collision with new walls" />
     <MESSAGE value="Added webcam screen &amp; paddle" />
     <MESSAGE value="Added hand detection and mapping to paddle movement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added hand detection and mapping to paddle movement" />
+    <MESSAGE value="Added classes for paddle and ball and cleaned game logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added classes for paddle and ball and cleaned game logic" />
   </component>
 </project>
