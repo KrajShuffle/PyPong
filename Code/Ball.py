@@ -48,3 +48,8 @@ class Ball:
                 self.vel_y -= self.spinc
             else:
                 self.vel_y += self.spinc
+    def vertical_paddle_collide(self, paddle):
+        if self.vel_y < 0: # Moving Upward
+            self.pos_y = max(paddle.bottom, self.pos_y)
+        else: # Moving Downward
+            self.pos_y = min(paddle.top, self.pos_y)
