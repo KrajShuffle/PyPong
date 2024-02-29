@@ -20,6 +20,7 @@ import pygame
 import cv2
 from Paddle import Paddle
 from Ball import Ball
+from PIL import Image
 import numpy as np
 from cvzone.HandTrackingModule import HandDetector
 
@@ -48,6 +49,12 @@ white = (255,255,255)
 green = (0, 255, 0)
 black = (0, 0, 0)
 
+# Load Game Images
+print(pygame.image.get_extended())
+heart_img = Image.open("../Game Assets/heart48x48.png")
+pygame_image = pygame.image.fromstring(heart_img.tobytes(), heart_img.size, heart_img.mode).convert_alpha()
+
+
 # Define the ball & ball velocity
 ball_radius = 20
 ball_pos = [(screen_width // 2), (height // 2)]
@@ -63,7 +70,7 @@ paddle_pos = [(screen_width - 150), (height // 2)]
 paddle = Paddle(paddle_pos[0], paddle_pos[1],paddle_width, paddle_height)
 
 # Define the walls and their location
-wall_thickness = 40
+wall_thickness = 60
 top_wall = pygame.Rect(0,0, screen_width, wall_thickness)
 bottom_wall = pygame.Rect(0,height - wall_thickness, screen_width, wall_thickness)
 left_wall = pygame.Rect(0, wall_thickness, wall_thickness, height - (2 * wall_thickness))
@@ -86,7 +93,6 @@ def move_ball(ball, coltargets):
     if len(collide_rects_x) != 0:
         if paddle.rect in collide_rects_x:
             ball.paddle_collide()
-
         ball.flip_velx()
         ball.movex()
     ball.movey()
@@ -151,7 +157,7 @@ while start:
     pygame.draw.rect(game_window, green, paddle.rect)
     for wall in walls:
         pygame.draw.rect(game_window, white, wall)
-
+    game_window.blit(pygame_image, (200, 0))
     # Update display
     pygame.display.update()
 
