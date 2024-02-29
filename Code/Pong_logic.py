@@ -102,35 +102,37 @@ def move_ball(ball, coltargets):
     # Move the ball vertically
     ball.rect.y += ball.vel_y
     collide_rects_y = collide_test(ball.rect, coltargets)
+    curr_vel = ball.vel_y
     for obj in collide_rects_y:
         if ball.vel_y > 0:
             ball.rect.bottom = obj.top
             if obj == paddle.rect:
                 paddle.vert_collision_response(ball)
                 ball.paddle_collide()
-                game_stats.increment_score(ball, paddle.rect)
+                game_stats.increment_score(ball, paddle.rect, curr_vel)
         elif ball.vel_y < 0:
             ball.rect.top = obj.bottom
             if obj == paddle.rect:
                 paddle.vert_collision_response(ball)
                 ball.paddle_collide()
-                game_stats.increment_score(ball, paddle.rect)
+                game_stats.increment_score(ball, paddle.rect, curr_vel)
         ball.flip_vely()
 
     # Move the ball horizontally
     ball.rect.x += ball.vel_x
     collide_rects_x = collide_test(ball.rect, coltargets)
+    curr_vel = ball.vel_x
     for obj in collide_rects_x:  # for each object collided with ball in collide_rects_x
         if ball.vel_x > 0:
             ball.rect.right = obj.left
             if obj == paddle.rect:
                 ball.paddle_collide()
-                game_stats.increment_score(ball, paddle.rect)
+                game_stats.increment_score(ball, paddle.rect, curr_vel)
         elif ball.vel_x < 0:
             ball.rect.left = obj.right
             if obj == paddle.rect:
                 ball.paddle_collide()
-                game_stats.increment_score(ball, paddle.rect)
+                game_stats.increment_score(ball, paddle.rect, curr_vel)
         ball.flip_velx()
 
 # Main Loop
