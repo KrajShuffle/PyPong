@@ -9,7 +9,7 @@ class Paddle:
         self.can_move = True
         self.time_pause = 500
         self.pause_initial_time = 0
-        self.max_velocity = 30
+        self.max_velocity = 18
         self.velocity = 0
     def vert_collision_response(self, ball):
         self.can_move = False
@@ -17,13 +17,10 @@ class Paddle:
         # Overlap Area Height between the ball and paddle
         # Prevent multiple collisions since ball cannot move far enough in next step without still being in the paddle
         overlap_height = self.rect.clip(ball.rect).height
-        print(overlap_height)
         if ball.vel_y > 0:
             self.rect.y += overlap_height
-            print(self.rect.y)
         else:
             self.rect.y -= overlap_height
-            print(self.rect.y)
 
     def update_paddle_y(self,hands, game_height, wall_thickness, wiggle_room):
         current_time = pygame.time.get_ticks()
