@@ -15,6 +15,7 @@ class GameMetrics:
         self.screen_width = screen_width
         self.sound_hurt = pygame.mixer.Sound("../Game Assets/hurt.ogg")
         self.sound_gain = pygame.mixer.Sound("../Game Assets/paddle.ogg")
+        self.unit_match = 38
     def increment_score(self, pong_ball, paddle, old_velocity):
         if np.abs(old_velocity) <= 9:
             self.score += (self.base_score)
@@ -43,11 +44,11 @@ class GameMetrics:
         else:
             vertical_distance = center_botwall_distance
         # Compute max distance traveled if ball just went up to the wall and then right
-        max_distance = vertical_distance + (self.screen_width - self.paddle_center[0])
+        max_distance = (vertical_distance + (self.screen_width - self.paddle_center[0])) * self.unit_match
         # Compute approximate distance ball would travel if it was a bad hit
         # bad hit only possible if ball bounces off top or bottom part of paddle to boundary
         diagonal_speed = np.sqrt((self.ball_vely **2) + (self.ball_velx ** 2))
-        distance_traveled = (current_time - self.contact_time) / diagonal_speed
+        distance_traveled = ((current_time - self.contact_time) * diagonal_speed)
 
         if(distance_traveled <= max_distance):
             self.decrement_score()
