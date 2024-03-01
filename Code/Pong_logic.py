@@ -52,7 +52,8 @@ black = (0, 0, 0)
 blue = (0, 0, 255)
 
 # Load Game Font & lives
-titlefont = pygame.font.Font("../Game Assets/Cabal-w5j3.ttf", 50)
+titleFont = pygame.font.Font("../Game Assets/Cabal-w5j3.ttf", 50)
+gameOverFont = pygame.font.Font("../Game Assets/Cabal-w5j3.ttf", 80)
 game_lives = 3
 
 # Load Game Images
@@ -110,12 +111,16 @@ def move_ball(ball, coltargets):
                 paddle.vert_collision_response(ball)
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
+            else:
+                game_stats.play_obstacle_sound()
         elif ball.vel_y < 0:
             ball.rect.top = obj.bottom
             if obj == paddle.rect:
                 paddle.vert_collision_response(ball)
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
+            else:
+                game_stats.play_obstacle_sound()
         ball.flip_vely()
 
     # Move the ball horizontally
@@ -128,11 +133,15 @@ def move_ball(ball, coltargets):
             if obj == paddle.rect:
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
+            else:
+                game_stats.play_obstacle_sound()
         elif ball.vel_x < 0:
             ball.rect.left = obj.right
             if obj == paddle.rect:
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
+            else:
+                game_stats.play_obstacle_sound()
         ball.flip_velx()
 
 # Main Loop
@@ -158,6 +167,23 @@ while start:
         game_stats.bad_hit_detector()
         game_stats.decrement_lives() # 3 to 0
         life_appear[game_stats.lives] = False
+        if game_stats.lives == 0:
+            # Labels
+            gameover_Label = gameOverFont.render("Game Over", False, white)
+            thanksLabel = gameOverFont.render("Thanks For Playing!", False, white)
+            gameScoreLabel = gameOverFont.render("Score: " + str(game_stats.score), False, white)
+
+            # Display Updates
+            game_window.fill(black)
+            game_window.blit(gameover_Label, ((screen_width // 2) - 300, height // 2 - 100))
+            game_window.blit(gameScoreLabel, ((screen_width // 2) - 300, height // 2))
+            game_window.blit(thanksLabel, ((screen_width // 2) - 300, height // 2 + 100))
+
+            # Update display
+            pygame.display.update()
+            pygame.time.delay(7_000) # Wait 7 seconds
+            break
+
 
 
     # Creating and loading in webcam image
@@ -196,9 +222,9 @@ while start:
         pygame.draw.rect(game_window, white, wall)
 
     # Text and Images
-    gameTitle = titlefont.render("Pong Game", False, black)
+    gameTitle = titleFont.render("Pong Game", False, black)
     game_window.blit(gameTitle, (wall_thickness, 0))
-    scoreLabel = titlefont.render("Score: " + str(game_stats.score), False, blue)
+    scoreLabel = titleFont.render("Score: " + str(game_stats.score), False, blue)
     game_window.blit(scoreLabel, (wall_thickness + 575, 0))
 
     for logical in life_appear:
