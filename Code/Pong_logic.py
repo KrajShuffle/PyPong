@@ -1,5 +1,5 @@
 """
-Pygame Template
+Main Game Loop File
 
     Import Pygame
     Initialize Pygame
@@ -42,7 +42,7 @@ cap = cv2.VideoCapture(0)
 cap.set(3, screen_width)
 cap.set(4, height)
 
-# Defining HandDetector
+# Defining HandDetector & Detection Confidence
 hand_detect = HandDetector(maxHands= 1, detectionCon= 0.7)
 
 # Define colors
@@ -60,21 +60,23 @@ gameOverFont = pygame.font.Font("../Game Assets/Cabal-w5j3.ttf", 80)
 # Load Game Images: Paddle & Heart
 paddle_img = pygame.image.load("../Game Assets/paddle-green.png").convert_alpha()
 heart_img = pygame.image.load("../Game Assets/heart48x48.png").convert_alpha()
+
+# Setup for Visualizing Hearts in Game
 game_lives = 4
 life_appear = [True] * game_lives
 start_life_pos = 950
 life_pos = start_life_pos
 
 
-# Define the ball & ball velocity
+# Define the ball, ball_rect, & ball velocity
 ball_radius = 16
 ball_center = [(screen_width // 2) -150, (height // 2)]
 ball_vel = [4, 4]
 ball_speedinc = 2
 ball_maxspeed = int(fps / 2) - 3
-
 ball_rect = pygame.Rect(ball_center[0] - ball_radius, ball_center[1] - ball_radius, (2 * ball_radius), (2 * ball_radius))
 ball = BallLife(ball_rect, ball_vel, ball_speedinc, ball_maxspeed)
+
 # Define paddle and location
 paddle_width = paddle_img.get_width()
 paddle_height = paddle_img.get_height()
@@ -99,7 +101,7 @@ obs1_rect = pygame.Rect(obs1_pos[0], obs1_pos[1], obs_width, obs_height)
 obs2_rect = pygame.Rect(obs2_pos[0], obs2_pos[1], obs_width, obs_height)
 obs_1 = Obstacle(obs1_rect, obs_width, obs_height, obs_velocity, height)
 obs_2 = Obstacle(obs2_rect, obs_width, obs_height, obs2_velocity, height)
-obs = [obs1_rect, obs2_rect]
+obs = [obs1_rect, obs2_rect] # List of obstacles
 # List of rects
 walls = [top_wall, bottom_wall, left_wall]
 rects = walls + obs + [paddle.rect]
@@ -109,6 +111,12 @@ game_stats = GameMetrics(game_lives, wall_thickness, height, screen_width)
 
 # Define collision detection test
 def collide_test(ball, rects):
+    """
+    Checks for collisions between ball and obstacles
+    :param ball: ball_rect (represents ball)
+    :param rects: list of potential objects ball can collide with
+    :return: list of objects that have collided with ball
+    """
     collided_rects = []
     for rect in rects:
         if ball.colliderect(rect):
@@ -116,9 +124,16 @@ def collide_test(ball, rects):
     return collided_rects
 
 def move_ball(ball, coltargets):
+    """
+    Move ball in first y and then x direction.
+    Check for collisions after each movement and initiate correct response
+    :param ball: ball_rect (represents ball)
+    :param coltargets: list of potential objects ball can collide with
+    :return: None
+    """
     # Move the ball vertically
-    ball.rect.y += ball.vel_y
-    collide_rects_y = collide_test(ball.rect, coltargets)
+    ball.movey()
+    collide_rects_y = collide_test(ball.rect, coltargets) # Check for Collisions
     curr_vel = ball.vel_y
     for obj in collide_rects_y:
         if ball.vel_y > 0:
@@ -136,7 +151,7 @@ def move_ball(ball, coltargets):
         ball.flip_vely()
 
     # Move the ball horizontally
-    ball.rect.x += ball.vel_x
+    ball.movex()
     collide_rects_x = collide_test(ball.rect, coltargets)
     curr_vel = ball.vel_x
     for obj in collide_rects_x:  # for each object collided with ball in collide_rects_x
@@ -164,14 +179,14 @@ while start:
     # Apply Logic
     # Update game state
     move_ball(ball, rects) # move ball
-    obs_1.movey(wall_thickness, ball_radius)
-    obs_2.movey(wall_thickness, ball_radius)
+    obs_1.movey(wall_thickness, ball_radius) # move obstacle1
+    obs_2.movey(wall_thickness, ball_radius) # move obstacle2
 
-    # if ball is about to exceed left or right most bounds; kept for testing game
-    if ((ball.pos_x - ball_radius) <= 0) or ((ball.pos_x + ball_radius) >= screen_width):
+    # if ball exceeds right most bounds
+    if ((ball.pos_x + ball_radius) >= screen_width):
         # Determine Reinitialized Ball Speed
         reset_vel = ball.reset_game_velocity()
-        # Reinitialize ball at original position & with calculated speed
+        # Reinitialize ball at default position with calculated speed
         ball_rect = pygame.Rect(ball_center[0] - ball_radius, ball_center[1] - ball_radius, (2 * ball_radius),
                                 (2 * ball_radius))
         ball = BallLife(ball_rect, reset_vel, ball_speedinc, ball_maxspeed)
@@ -179,8 +194,9 @@ while start:
         game_stats.bad_hit_detector()
         game_stats.decrement_lives() # 3 to 0
         life_appear[game_stats.lives] = False
+        # If Player loses, corresponding actions
         if game_stats.lives == 0:
-            # Labels
+            # Define Labels to be displayed
             gameover_Label = gameOverFont.render("Game Over", False, white)
             thanksLabel = gameOverFont.render("Thanks For Playing!", False, white)
             gameScoreLabel = gameOverFont.render("Score: " + str(game_stats.score), False, white)
@@ -193,16 +209,18 @@ while start:
 
             # Update display
             pygame.display.update()
-            pygame.time.delay(7_000) # Wait 7 seconds
+            pygame.time.delay(7_000) # Wait 7 seconds before ending game
             break
 
     # Creating and loading in webcam image
     success, img = cap.read()
+    # Flip horizontally to correct orientation
     cor_img_orient = cv2.flip(img, 1)
+    # Detect hands and return
     hands, img_drawn = hand_detect.findHands(cor_img_orient, flipType= False)
-    paddle.update_paddle_y(hands, height, wall_thickness)
-    img_drawn = np.rot90(img_drawn)
-    RGB_img = cv2.cvtColor(img_drawn, cv2.COLOR_BGR2RGB)
+    paddle.update_paddle_y(hands, height, wall_thickness) # Use Hand Position to Guide Paddle Position
+    img_drawn = np.rot90(img_drawn) # Flip by 90 to properly display image as background
+    RGB_img = cv2.cvtColor(img_drawn, cv2.COLOR_BGR2RGB) # Account for open-cv BGR vs expected RGB
 
     # If not reading, kill game
     if not success:
@@ -226,9 +244,8 @@ while start:
     game_window.blit(cam_surface, (0, 0)) # Adding transparent Canvas on top of black bg
     pygame.draw.circle(game_window, white,
                        [ball.pos_x + ball_radius, ball.pos_y + ball_radius], ball_radius)  # white ball
-    #pygame.draw.rect(game_window, green, paddle.rect)
-    pygame.draw.rect(game_window, blue, obs_1.rect)
-    pygame.draw.rect(game_window, blue, obs2_rect)
+    pygame.draw.rect(game_window, blue, obs_1.rect) # Display obstacle1
+    pygame.draw.rect(game_window, blue, obs2_rect) # Display obstacle2
     for wall in walls:
         pygame.draw.rect(game_window, white, wall)
 
@@ -238,6 +255,7 @@ while start:
     scoreLabel = titleFont.render("Score: " + str(game_stats.score), False, blue)
     game_window.blit(scoreLabel, (wall_thickness + 475, 0))
     game_window.blit(paddle_img, (paddle.rect.x, paddle.rect.y))
+    # Remove Displayed Heart if player loses life
     for logical in life_appear:
         if logical:
             game_window.blit(heart_img, (life_pos, 8))
