@@ -30,9 +30,9 @@ class GameMetrics:
         self.paddle_center = [paddle.centerx, paddle.centery]
     def decrement_lives(self):
         self.lives -= 1
+        self.sound_hurt.play()
     def decrement_score(self):
         self.score -= self.base_score * 2
-        self.sound_hurt.play()
     def play_obstacle_sound(self):
         self.sound_obs.play()
     def bad_hit_detector(self):
@@ -54,6 +54,3 @@ class GameMetrics:
 
         if(distance_traveled <= max_distance):
             self.decrement_score()
-    def reset_game(self):
-        self.score = 0
-        self.lives = 3
