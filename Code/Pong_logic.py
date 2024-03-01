@@ -71,14 +71,14 @@ ball_radius = 16
 ball_center = [(screen_width // 2) -150, (height // 2)]
 ball_vel = [4, 4]
 ball_speedinc = 2
-ball_maxspeed = int(fps / 2) - 1
+ball_maxspeed = int(fps / 2) - 3
 
 ball_rect = pygame.Rect(ball_center[0] - ball_radius, ball_center[1] - ball_radius, (2 * ball_radius), (2 * ball_radius))
 ball = BallLife(ball_rect, ball_vel, ball_speedinc, ball_maxspeed)
 # Define paddle and location
 paddle_width = paddle_img.get_width()
 paddle_height = paddle_img.get_height()
-paddle_xpos = (screen_width - 225)
+paddle_xpos = (screen_width - 200)
 paddle_pos = [paddle_xpos, (height // 2)]
 paddle = Paddle(paddle_pos[0], paddle_pos[1],paddle_width, paddle_height)
 
@@ -127,16 +127,12 @@ def move_ball(ball, coltargets):
                 paddle.vert_collision_response(ball)
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
-            else:
-                game_stats.play_obstacle_sound()
         elif ball.vel_y < 0:
             ball.rect.top = obj.bottom
             if obj == paddle.rect:
                 paddle.vert_collision_response(ball)
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
-            else:
-                game_stats.play_obstacle_sound()
         ball.flip_vely()
 
     # Move the ball horizontally
@@ -149,15 +145,11 @@ def move_ball(ball, coltargets):
             if obj == paddle.rect:
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
-            else:
-                game_stats.play_obstacle_sound()
         elif ball.vel_x < 0:
             ball.rect.left = obj.right
             if obj == paddle.rect:
                 ball.paddle_collide()
                 game_stats.increment_score(ball, paddle.rect, curr_vel)
-            else:
-                game_stats.play_obstacle_sound()
         ball.flip_velx()
 
 # Main Loop

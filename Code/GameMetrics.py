@@ -15,7 +15,6 @@ class GameMetrics:
         self.screen_width = screen_width
         self.sound_hurt = pygame.mixer.Sound("../Game Assets/hurt.ogg")
         self.sound_gain = pygame.mixer.Sound("../Game Assets/paddle.ogg")
-        self.sound_obs = pygame.mixer.Sound("../Game Assets/obstacle_bounce.ogg")
     def increment_score(self, pong_ball, paddle, old_velocity):
         if np.abs(old_velocity) <= 9:
             self.score += (self.base_score)
@@ -33,8 +32,6 @@ class GameMetrics:
         self.sound_hurt.play()
     def decrement_score(self):
         self.score -= self.base_score * 2
-    def play_obstacle_sound(self):
-        self.sound_obs.play()
     def bad_hit_detector(self):
         current_time = pygame.time.get_ticks()
         # Determine Largest Vertical Distance
