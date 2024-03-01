@@ -19,6 +19,7 @@ Pygame Template
 import pygame
 import cv2
 from Paddle import Paddle
+from Obstacle import Obstacle
 from BallLife import BallLife
 from GameMetrics import GameMetrics
 import numpy as np
@@ -42,7 +43,7 @@ cap.set(3, screen_width)
 cap.set(4, height)
 
 # Defining HandDetector
-hand_detect = HandDetector(maxHands= 1)
+hand_detect = HandDetector(maxHands= 1, detectionCon= 0.7)
 
 # Define colors
 white = (255,255,255)
@@ -65,7 +66,7 @@ life_pos = start_life_pos
 
 # Define the ball & ball velocity
 ball_radius = 20
-ball_center = [(screen_width // 2) -50, (height // 2)]
+ball_center = [(screen_width // 2) -150, (height // 2)]
 ball_vel = [4, 4]
 ball_speedinc = 2
 ball_maxspeed = int(fps / 2) - 1
@@ -75,7 +76,8 @@ ball = BallLife(ball_rect, ball_vel, ball_speedinc, ball_maxspeed)
 # Define paddle and location
 paddle_width = 40
 paddle_height = 100
-paddle_pos = [(screen_width - 225), (height // 2)]
+paddle_xpos = (screen_width - 225)
+paddle_pos = [paddle_xpos, (height // 2)]
 paddle = Paddle(paddle_pos[0], paddle_pos[1],paddle_width, paddle_height)
 
 # Define the walls and their location
@@ -84,9 +86,21 @@ top_wall = pygame.Rect(0,0, screen_width, wall_thickness)
 bottom_wall = pygame.Rect(0,height - wall_thickness, screen_width, wall_thickness)
 left_wall = pygame.Rect(0, wall_thickness, wall_thickness, height - (2 * wall_thickness))
 
+# Define the obstacles
+obs1_pos = [250, 500]
+obs2_pos = [600, 120]
+obs_width = 50
+obs_height = 80
+obs_velocity = [7, 7]
+obs2_velocity = [4, 4]
+obs1_rect = pygame.Rect(obs1_pos[0], obs1_pos[1], obs_width, obs_height)
+obs2_rect = pygame.Rect(obs2_pos[0], obs2_pos[1], obs_width, obs_height)
+obs_1 = Obstacle(obs1_rect, obs_width, obs_height, obs_velocity, height)
+obs_2 = Obstacle(obs2_rect, obs_width, obs_height, obs2_velocity, height)
+obs = [obs1_rect, obs2_rect]
 # List of rects
 walls = [top_wall, bottom_wall, left_wall]
-rects = [top_wall, bottom_wall, left_wall, paddle.rect]
+rects = walls + obs + [paddle.rect]
 
 # Initialize Game
 game_stats = GameMetrics(game_lives, wall_thickness, height, screen_width)
@@ -155,7 +169,9 @@ while start:
 
     # Apply Logic
     # Update game state
-    move_ball(ball, rects)
+    move_ball(ball, rects) # move ball
+    obs_1.movey(wall_thickness, ball_radius)
+    obs_2.movey(wall_thickness, ball_radius)
 
     # if ball is about to exceed left or right most bounds; kept for testing game
     if ((ball.pos_x - ball_radius) <= 0) or ((ball.pos_x + ball_radius) >= screen_width):
@@ -186,16 +202,13 @@ while start:
             pygame.time.delay(7_000) # Wait 7 seconds
             break
 
-
-
     # Creating and loading in webcam image
     success, img = cap.read()
     cor_img_orient = cv2.flip(img, 1)
     hands, img_drawn = hand_detect.findHands(cor_img_orient, flipType= False)
-    paddle.update_paddle_y(hands, height, wall_thickness, 3)
+    paddle.update_paddle_y(hands, height, wall_thickness)
     img_drawn = np.rot90(img_drawn)
     RGB_img = cv2.cvtColor(img_drawn, cv2.COLOR_BGR2RGB)
-
 
     # If not reading, kill game
     if not success:
@@ -220,6 +233,8 @@ while start:
     pygame.draw.circle(game_window, white,
                        [ball.pos_x + ball_radius, ball.pos_y + ball_radius], ball_radius)  # white ball
     pygame.draw.rect(game_window, green, paddle.rect)
+    pygame.draw.rect(game_window, blue, obs_1.rect)
+    pygame.draw.rect(game_window, blue, obs2_rect)
     for wall in walls:
         pygame.draw.rect(game_window, white, wall)
 
@@ -231,7 +246,7 @@ while start:
 
     for logical in life_appear:
         if logical:
-            game_window.blit(heart_img, (life_pos, 12))
+            game_window.blit(heart_img, (life_pos, 8))
         life_pos += 55
     life_pos = start_life_pos # Redefined to prevent displaying outside display
 
