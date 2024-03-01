@@ -9,9 +9,8 @@ class Paddle:
         self.can_move = True
         self.time_pause = 500
         self.pause_initial_time = 0
-        self.max_velocity = 18
+        self.max_velocity = 20
         self.velocity = 0
-        self.wiggle_room = 15
     def vert_collision_response(self, ball):
         self.can_move = False
         self.pause_initial_time = pygame.time.get_ticks()
@@ -42,7 +41,7 @@ class Paddle:
                 else:
                     self.velocity = min(new_velocity, self.max_velocity)
                 self.rect.y += self.velocity
-            if not (yhand_cam < max_bottom):
-                self.rect.y = max_bottom
-            if not((yhand_cam - self.wiggle_room) > max_top):
-                self.rect.y = max_top
+            elif yhand_cam > max_bottom:
+                self.rect.y = min(self.rect.y + self.max_velocity, max_bottom)
+            elif yhand_cam < max_top:
+                self.rect.y = max(self.rect.y - self.max_velocity, max_top)
