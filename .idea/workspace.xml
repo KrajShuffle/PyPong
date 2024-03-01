@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Corrected Actual Distance Calculation &amp; Determined Approx Distance Conversion Factor">
-      <change afterPath="$PROJECT_DIR$/Code/README.md" afterDir="false" />
+    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Used Game Sound &amp; Image Assets">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/BallLife.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/BallLife.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/GameMetrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/GameMetrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Obstacle.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Obstacle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Paddle.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Paddle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Pong_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Pong_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Code/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +275,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709331359314</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="ReadME.md for repo">
+      <option name="closed" value="true" />
+      <created>1709332868599</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1709332868599</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Used Game Sound &amp; Image Assets">
+      <option name="closed" value="true" />
+      <created>1709333019953</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1709333019953</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -321,6 +342,8 @@
     <MESSAGE value="Preventing sharp jumps to walls when hand out of game bounds" />
     <MESSAGE value="Removed Obstacle Sound (Gets Oppressive later in game)" />
     <MESSAGE value="Corrected Actual Distance Calculation &amp; Determined Approx Distance Conversion Factor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected Actual Distance Calculation &amp; Determined Approx Distance Conversion Factor" />
+    <MESSAGE value="ReadME.md for repo" />
+    <MESSAGE value="Used Game Sound &amp; Image Assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Used Game Sound &amp; Image Assets" />
   </component>
 </project>

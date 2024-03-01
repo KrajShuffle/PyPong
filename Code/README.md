@@ -127,3 +127,8 @@ There is no ball-obstacle sound because it goes off way too often when the playe
    - Source of Paddle Design used in game
 7. [ChatGPT](https://chat.openai.com)
    - Used for debugging code issues and verifying correct syntax usage
+8. [Hand Detection Guide & Coordinate Mapping](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker)
+   - Used to determine position of hand and guide paddle position
+
+## Known Issues:
+1. If you are running on Mac, sometimes the game picks up the iPhone camera as the default camera. If that happens, click disconnect iPhone camera to remove iPhone from Mac camera list and rerun code. 
