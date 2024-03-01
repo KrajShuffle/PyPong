@@ -52,20 +52,22 @@ green = (0, 255, 0)
 black = (0, 0, 0)
 blue = (0, 0, 255)
 
-# Load Game Font & lives
+# Load Game Font
 titleFont = pygame.font.Font("../Game Assets/Cabal-w5j3.ttf", 50)
 gameOverFont = pygame.font.Font("../Game Assets/Cabal-w5j3.ttf", 80)
-game_lives = 3
 
-# Load Game Images
+
+# Load Game Images: Paddle & Heart
+paddle_img = pygame.image.load("../Game Assets/paddle-green.png").convert_alpha()
 heart_img = pygame.image.load("../Game Assets/heart48x48.png").convert_alpha()
+game_lives = 4
 life_appear = [True] * game_lives
 start_life_pos = 950
 life_pos = start_life_pos
 
 
 # Define the ball & ball velocity
-ball_radius = 20
+ball_radius = 16
 ball_center = [(screen_width // 2) -150, (height // 2)]
 ball_vel = [4, 4]
 ball_speedinc = 2
@@ -74,8 +76,8 @@ ball_maxspeed = int(fps / 2) - 1
 ball_rect = pygame.Rect(ball_center[0] - ball_radius, ball_center[1] - ball_radius, (2 * ball_radius), (2 * ball_radius))
 ball = BallLife(ball_rect, ball_vel, ball_speedinc, ball_maxspeed)
 # Define paddle and location
-paddle_width = 40
-paddle_height = 100
+paddle_width = paddle_img.get_width()
+paddle_height = paddle_img.get_height()
 paddle_xpos = (screen_width - 225)
 paddle_pos = [paddle_xpos, (height // 2)]
 paddle = Paddle(paddle_pos[0], paddle_pos[1],paddle_width, paddle_height)
@@ -232,7 +234,7 @@ while start:
     game_window.blit(cam_surface, (0, 0)) # Adding transparent Canvas on top of black bg
     pygame.draw.circle(game_window, white,
                        [ball.pos_x + ball_radius, ball.pos_y + ball_radius], ball_radius)  # white ball
-    pygame.draw.rect(game_window, green, paddle.rect)
+    #pygame.draw.rect(game_window, green, paddle.rect)
     pygame.draw.rect(game_window, blue, obs_1.rect)
     pygame.draw.rect(game_window, blue, obs2_rect)
     for wall in walls:
@@ -242,8 +244,8 @@ while start:
     gameTitle = titleFont.render("Pong Game", False, black)
     game_window.blit(gameTitle, (wall_thickness, 0))
     scoreLabel = titleFont.render("Score: " + str(game_stats.score), False, blue)
-    game_window.blit(scoreLabel, (wall_thickness + 575, 0))
-
+    game_window.blit(scoreLabel, (wall_thickness + 475, 0))
+    game_window.blit(paddle_img, (paddle.rect.x, paddle.rect.y))
     for logical in life_appear:
         if logical:
             game_window.blit(heart_img, (life_pos, 8))

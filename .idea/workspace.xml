@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Game Over Screen &amp; Sounds">
-      <change beforePath="$PROJECT_DIR$/Code/BallLife.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/BallLife.py" afterDir="false" />
+    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Obstacles &amp; Redefined ball &amp; lives positions">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/Pong_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Pong_logic.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +42,7 @@
     </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="background_test" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,7 +69,7 @@
     "Python.PyGame_Template.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "ImproveAesthetics",
     "run.code.analysis.last.selected.profile": "aDefault",
     "settings.editor.selected.configurable": "vcs.Subversion.SSH"
   }
@@ -203,7 +203,31 @@
       <option name="project" value="LOCAL" />
       <updated>1709253809765</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Added Reset Velocity to Ball Reinitialization">
+      <option name="closed" value="true" />
+      <created>1709254800819</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709254800819</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Smoothen paddle movement">
+      <option name="closed" value="true" />
+      <created>1709273848612</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709273848612</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Obstacles &amp; Redefined ball &amp; lives positions">
+      <option name="closed" value="true" />
+      <created>1709274140303</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1709274140303</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,6 +270,9 @@
     <MESSAGE value="Improved &amp; Adaptable ball movement with new background" />
     <MESSAGE value="Tiered Scoring System" />
     <MESSAGE value="Game Over Screen &amp; Sounds" />
-    <option name="LAST_COMMIT_MESSAGE" value="Game Over Screen &amp; Sounds" />
+    <MESSAGE value="Added Reset Velocity to Ball Reinitialization" />
+    <MESSAGE value="Smoothen paddle movement" />
+    <MESSAGE value="Obstacles &amp; Redefined ball &amp; lives positions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Obstacles &amp; Redefined ball &amp; lives positions" />
   </component>
 </project>
