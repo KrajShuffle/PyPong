@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Used Game Sound &amp; Image Assets">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/BallLife.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/BallLife.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/GameMetrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/GameMetrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Obstacle.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Obstacle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Paddle.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Paddle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Pong_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Pong_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Code/README.md" afterDir="false" />
+    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Updated README with known issue and another resource">
+      <change beforePath="$PROJECT_DIR$/Code/Ball_Paddle_Setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/PyGame_Template.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,7 +286,55 @@
       <option name="project" value="LOCAL" />
       <updated>1709333019953</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Cleaned &amp; Documented Ball Class">
+      <option name="closed" value="true" />
+      <created>1709337127332</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1709337127332</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Cleaned &amp; Documented Game Metrics Class">
+      <option name="closed" value="true" />
+      <created>1709337142356</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1709337142356</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Cleaned &amp; Documented Obstacle Class">
+      <option name="closed" value="true" />
+      <created>1709337155294</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1709337155294</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Cleaned &amp; Documented Paddle Class">
+      <option name="closed" value="true" />
+      <created>1709337163987</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1709337163987</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Cleaned &amp; Documented Main Game Loop">
+      <option name="closed" value="true" />
+      <created>1709337174380</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1709337174380</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Updated README with known issue and another resource">
+      <option name="closed" value="true" />
+      <created>1709337212877</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1709337212877</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -321,10 +364,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="File for Using Laptop Camera" />
-    <MESSAGE value="Ball collision with display" />
-    <MESSAGE value="Added ball collision with new walls" />
-    <MESSAGE value="Added webcam screen &amp; paddle" />
     <MESSAGE value="Added hand detection and mapping to paddle movement" />
     <MESSAGE value="Added classes for paddle and ball and cleaned game logic" />
     <MESSAGE value="Mapped hand_y range to paddle_y range" />
@@ -344,6 +383,12 @@
     <MESSAGE value="Corrected Actual Distance Calculation &amp; Determined Approx Distance Conversion Factor" />
     <MESSAGE value="ReadME.md for repo" />
     <MESSAGE value="Used Game Sound &amp; Image Assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Used Game Sound &amp; Image Assets" />
+    <MESSAGE value="Cleaned &amp; Documented Ball Class" />
+    <MESSAGE value="Cleaned &amp; Documented Game Metrics Class" />
+    <MESSAGE value="Cleaned &amp; Documented Obstacle Class" />
+    <MESSAGE value="Cleaned &amp; Documented Paddle Class" />
+    <MESSAGE value="Cleaned &amp; Documented Main Game Loop" />
+    <MESSAGE value="Updated README with known issue and another resource" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated README with known issue and another resource" />
   </component>
 </project>

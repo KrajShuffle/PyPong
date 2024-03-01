@@ -31,7 +31,7 @@ pygame.init()
 # Create Window/Display
 screen_width, height = 1280 - 100, 720
 game_window = pygame.display.set_mode((screen_width, height))
-pygame.display.set_caption("Pong Life")
+pygame.display.set_caption("Pong Game")
 
 # Initialize clock for FPS
 fps = 60
