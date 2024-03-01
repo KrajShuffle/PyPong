@@ -11,6 +11,7 @@ class Paddle:
         self.pause_initial_time = 0
         self.max_velocity = 18
         self.velocity = 0
+        self.wiggle_room = 15
     def vert_collision_response(self, ball):
         self.can_move = False
         self.pause_initial_time = pygame.time.get_ticks()
@@ -22,7 +23,7 @@ class Paddle:
         else:
             self.rect.y -= overlap_height
 
-    def update_paddle_y(self,hands, game_height, wall_thickness, wiggle_room):
+    def update_paddle_y(self,hands, game_height, wall_thickness):
         current_time = pygame.time.get_ticks()
         if (current_time - self.pause_initial_time) >= self.time_pause:
             self.can_move = True
@@ -32,8 +33,8 @@ class Paddle:
             x_0, y_0 = hand['lmList'][0]  # Wrist
             # Mapping from approximately palm of hand to center of paddle
             yhand_cam = int(((y_9 + y_0) / 2) - (self.pd_height / 2))
-            max_bottom = game_height - (wall_thickness + wiggle_room + self.pd_height)
-            max_top = wall_thickness + wiggle_room
+            max_bottom = game_height - (wall_thickness + self.pd_height)
+            max_top = wall_thickness
             if ((yhand_cam < max_bottom) & (yhand_cam > max_top)):
                 new_velocity = yhand_cam - self.rect.y
                 if new_velocity < 0:
@@ -43,5 +44,5 @@ class Paddle:
                 self.rect.y += self.velocity
             if not (yhand_cam < max_bottom):
                 self.rect.y = max_bottom
-            if not(yhand_cam > max_top):
+            if not((yhand_cam - self.wiggle_room) > max_top):
                 self.rect.y = max_top
