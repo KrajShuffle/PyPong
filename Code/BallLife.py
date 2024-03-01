@@ -8,6 +8,8 @@ class BallLife:
         self.vel_y = ball_velocity[1]
         self.mxspd = ball_maxspeed
         self.spinc = ball_spscalar
+        self.threshold = 10
+        self.reset_drop = 6
 
     @property
     def pos_x(self):
@@ -49,8 +51,10 @@ class BallLife:
             else:
                 self.vel_y += self.spinc
 
-    def vertical_paddle_collide(self, paddle):
-        if self.vel_y < 0: # Moving Upward
-            self.rect.top = max(paddle.bottom, self.rect.top)
-        else: # Moving Downward
-            self.rect.top = min(paddle.top, self.rect.top)
+    def reset_game_velocity(self):
+        if np.abs(self.vel_x) > self.threshold:
+            new_vel = [self.vel_x - self.reset_drop, self.vel_x - self.reset_drop]
+        else:
+            new_vel = [self.reset_drop, self.reset_drop]
+        return new_vel
+

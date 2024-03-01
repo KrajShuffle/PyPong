@@ -159,10 +159,12 @@ while start:
 
     # if ball is about to exceed left or right most bounds; kept for testing game
     if ((ball.pos_x - ball_radius) <= 0) or ((ball.pos_x + ball_radius) >= screen_width):
-        # Reinitialize ball at original position
+        # Determine Reinitialized Ball Speed
+        reset_vel = ball.reset_game_velocity()
+        # Reinitialize ball at original position & with calculated speed
         ball_rect = pygame.Rect(ball_center[0] - ball_radius, ball_center[1] - ball_radius, (2 * ball_radius),
                                 (2 * ball_radius))
-        ball = BallLife(ball_rect, ball_vel, ball_speedinc, ball_maxspeed)
+        ball = BallLife(ball_rect, reset_vel, ball_speedinc, ball_maxspeed)
         # Game Penalty Actions
         game_stats.bad_hit_detector()
         game_stats.decrement_lives() # 3 to 0
