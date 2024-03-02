@@ -9,7 +9,7 @@ class GameMetrics:
         self.score = 0
         self.base_score = 10
         self.lives = game_lives
-        self.contact_time = 0
+        self.contact_time = np.inf # Initially set to infinite to prevent point loss on game load
         self.ball_velx = 0
         self.ball_vely = 0
         self.paddle_center = [0,0]
