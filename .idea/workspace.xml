@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Updated README with known issue and another resource">
+    <list default="true" id="879298ba-3292-4214-ac9d-926fd100b32b" name="Changes" comment="Correct Screen Display Caption">
       <change beforePath="$PROJECT_DIR$/Code/Ball_Paddle_Setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/GameMetrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/GameMetrics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/PyGame_Template.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -334,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709337212877</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Correct Screen Display Caption">
+      <option name="closed" value="true" />
+      <created>1709337323956</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1709337323956</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -364,7 +373,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added hand detection and mapping to paddle movement" />
     <MESSAGE value="Added classes for paddle and ball and cleaned game logic" />
     <MESSAGE value="Mapped hand_y range to paddle_y range" />
     <MESSAGE value="Implemented velocity constrained movement &amp; ball overlap response" />
@@ -389,6 +397,7 @@
     <MESSAGE value="Cleaned &amp; Documented Paddle Class" />
     <MESSAGE value="Cleaned &amp; Documented Main Game Loop" />
     <MESSAGE value="Updated README with known issue and another resource" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated README with known issue and another resource" />
+    <MESSAGE value="Correct Screen Display Caption" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct Screen Display Caption" />
   </component>
 </project>
