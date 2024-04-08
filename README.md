@@ -110,7 +110,7 @@ I have 2 sounds:
 1. Ball-Paddle Contact Sound
 2. Player Lost Life Sound
 
-There is no ball-obstacle sound because it goes off way too often when the player is playing at higher speeds. 
+There is no ball-obstacle contact sound because it goes off way too often when the player is playing at higher speeds. 
 
 ## Resources & References:
 1. [Murtaza's Computer Vision Game Development](https://www.youtube.com/watch?v=lDfplevUWRw&t=5459s)
