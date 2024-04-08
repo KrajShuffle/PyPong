@@ -108,7 +108,7 @@ Given this information, we can calculate the distance of the ball's longest path
 ### Used Sounds
 I have 2 sounds:
 1. Ball-Paddle Contact Sound
-2. Ball-(out of bounds) Sound
+2. Player Lost Life Sound
 
 There is no ball-obstacle sound because it goes off way too often when the player is playing at higher speeds. 
 
